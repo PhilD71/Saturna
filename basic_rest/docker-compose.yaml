@@ -1,0 +1,6 @@
+services:
+  basic_rest_server:
+    build: .
+    container_name: basic_rest_server
+    ports:
+      - 8080:8080
