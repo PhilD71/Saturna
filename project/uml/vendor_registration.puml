@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title Vendor Registration
+participant Vendor as vendor
+participant System as sys
+database Database as db
+
+vendor -> sys: Signup Request
+|||
+sys -> sys: Generate necessary \n unique ID requirements
+|||
+sys -> db: Save information
+|||
+return
+|||
+sys --> vendor: Return confirmation
+@enduml

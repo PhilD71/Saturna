@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title Customer Employee Authentication
+
+'Not sure if we need vendor yet
+'participant Vendor as vendor
+participant Employee as employee
+participant Customer as customer
+participant System as sys
+database Database as db
+
+employee -> sys: Request a one time identification code
+|||
+sys -> db: Lookup employee information
+return
+|||
+sys -> sys: Authenticate Employee
+|||
+alt If authentication OK
+    |||
+    sys -> db: Generate code and save
+    return
+    |||
+    sys --> employee: Return one time identification code (valid for N min)
+    |||
+else Authentication NOT OK
+    |||
+    sys --> employee: Return Error
+end
+|||
+|||
+|||
+customer -> sys: Send scanned one time unique employee code
+|||
+sys -> db: Query for code
+|||
+db -> sys: Return employee information if code exists, error if none
+|||
+alt If code exists
+    |||
+    sys --> customer: Return employee and vendor\ninformation which code represents
+    |||
+else If error
+    |||
+    sys --> customer: Invalid code
+end
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title Employee Vendor Registration
+participant Employee as employee
+participant Vendor as vendor
+participant System as sys
+database Database as db
+
+vendor -> sys: Employee registration request
+|||
+sys -> sys: Generate necessary \n unique ID requirements
+|||
+sys -> db: Save unique ID and signup code
+return
+|||
+sys --> vendor: Return unique Employee signup code
+|||
+vendor -> employee: Return unique Employee signup code
+|||
+employee -> sys: Complete signup (Login & Password)
+|||
+sys -> db: Save information
+db --> sys: OK
+|||
+sys --> vendor: Employee signup complete
+|||
+sys --> employee: Employee signup complete
+@enduml
